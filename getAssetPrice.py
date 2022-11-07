@@ -8,16 +8,9 @@ url = f"https://opensea.io/assets/{network}/{contract}/{assetNo}"
 agent = {"User-Agent":'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'}
 page = requests.get(url, headers=agent)
 soup = BeautifulSoup(page.content, 'html.parser')
-# results = soup.find("div", class_= "TradeStation--main")
-# print(results)
 
-#print(soup.title.text)
+
 body = soup.body.main
-#print(soup.body.main)
-
-# price = body.find("Current Price")
-# print(price)
-
 content = body.decode()
 priceString=content.find("Price--amount")
 if (priceString==-1):
@@ -26,4 +19,9 @@ else:
     endAmount=content.find("<!",priceString+15)
     startAmount=content.find('">',priceString+15)
     print(content[startAmount+2:endAmount])
+
+
+
+
+
 
